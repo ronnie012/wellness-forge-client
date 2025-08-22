@@ -45,7 +45,7 @@ export default function AddProduct() {
         return;
       }
 
-      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/products`, formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API_URL!.replace(/\/$/, '')}/api/products`, formData, {
         headers: { Authorization: `Bearer ${currentSession.accessToken}` },
       });
       showToast("Product added successfully!", "success");

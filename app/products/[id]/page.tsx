@@ -22,7 +22,7 @@ export default function ProductDetails() {
 
   useEffect(() => {
     if (id) {
-      axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/products/${id}`)
+      axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL!.replace(/\/$/, '')}/api/products/${id}`)
         .then(res => {
           setProduct(res.data);
           setLoading(false);

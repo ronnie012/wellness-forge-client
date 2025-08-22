@@ -18,7 +18,7 @@ export default function ProductHighlights() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/products`)
+    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL!.replace(/\/$/, '')}/api/products`)
       .then(res => {
         setProducts(res.data.slice(0, 3));
         setLoading(false);

@@ -15,7 +15,7 @@ export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/products`)
+    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL!.replace(/\/$/, '')}/api/products`)
       .then(res => setProducts(res.data))
       .catch(error => console.error("Error fetching products:", error));
   }, []);
