@@ -1,39 +1,42 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
-
-interface Toast {
-  message: string;
-  type: "success" | "error";
-}
+import { useState, useCallback, createContext, useContext, ReactNode } from 'react';
 
 interface ToastContextType {
-  showToast: (message: string, type: "success" | "error") => void;
+  showToast: (message: string, type: 'success' | 'error') => void;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
-export function ToastProvider({ children }: { children: React.ReactNode }) {
-  const [toast, setToast] = useState<Toast | null>(null);
+export const useToast = () => {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error('useToast must be used within a ToastProvider');
+  }
+  return context;
+};
 
-  useEffect(() => {
-    if (toast) {
-      const timer = setTimeout(() => setToast(null), 3000); // Auto-dismiss after 3s
-      return () => clearTimeout(timer);
-    }
-  }, [toast]);
+interface ToastProviderProps {
+  children: ReactNode;
+}
 
-  const showToast = (message: string, type: "success" | "error") => {
+export const ToastProvider = ({ children }: ToastProviderProps) => {
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  const showToast = useCallback((message: string, type: 'success' | 'error') => {
     setToast({ message, type });
-  };
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
+  }, []);
 
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
       {toast && (
         <div
-          className={`fixed top-4 right-4 p-4 rounded shadow-lg ${
-            toast.type === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white"
+          className={`fixed bottom-4 right-4 p-4 rounded-md text-white ${
+            toast.type === 'success' ? 'bg-green-500' : 'bg-red-500'
           }`}
         >
           {toast.message}
@@ -41,14 +44,4 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       )}
     </ToastContext.Provider>
   );
-}
-
-export function useToast() {
-  const context = useContext(ToastContext);
-  if (!context) {
-    throw new Error("useToast must be used within a ToastProvider");
-  }
-  return context;
-}
-
-
+};

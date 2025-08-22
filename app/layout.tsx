@@ -20,12 +20,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body className={inter.className}>
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
         <ToastProvider>
             <ThemeProvider>
             <AuthProvider>
               <Navbar />
-              {children}
+              <main className="flex-grow min-h-[calc(100vh-theme(spacing.16)-theme(spacing.16))]">
+                {children}
+              </main>
             </AuthProvider>
           </ThemeProvider>
         </ToastProvider>

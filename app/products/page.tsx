@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 
-interface Kit {
+interface Product {
   _id: string;
   name: string;
   description: string;
@@ -12,7 +12,7 @@ interface Kit {
 }
 
 export default function Products() {
-  const [products, setProducts] = useState<Kit[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/products`)

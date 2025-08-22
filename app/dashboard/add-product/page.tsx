@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -21,6 +21,13 @@ export default function AddProduct() {
     benefits: "",
   });
 
+  useEffect(() => {
+    if (session?.error === "RefreshAccessTokenError") {
+      showToast("Session expired. Please log in again.", "error");
+      router.push("/login");
+    }
+  }, [session, router, showToast]);
+
   if (status === "loading") return <div>Loading...</div>;
   if (!session) {
     router.push("/login");
@@ -32,14 +39,14 @@ export default function AddProduct() {
     setLoading(true);
     try {
       const currentSession = await getSession();
-      if (!currentSession?.id_token) {
+      if (!currentSession?.accessToken) {
         showToast("Authentication token not found.", "error");
         setLoading(false);
         return;
       }
 
       await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/products`, formData, {
-        headers: { Authorization: `Bearer ${currentSession.id_token}` },
+        headers: { Authorization: `Bearer ${currentSession.accessToken}` },
       });
       showToast("Product added successfully!", "success");
       router.push("/products"); // Redirect to products list after adding
