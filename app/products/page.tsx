@@ -39,10 +39,10 @@ export default function Products() {
 
   return (
     <div className="py-4 px-12 bg-background text-foreground">
-      <h1 className="text-3xl font-bold text-center text-foreground">Products</h1>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+      <h1 className="text-3xl font-bold text-center text-foreground py-4">Products</h1>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 mb-8">
         {products.map(product => (
-          <li key={product._id} className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex flex-col">
+          <li key={product._id} className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-2xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl dark:hover:shadow-3xl transition-all duration-300 transform hover:scale-105 flex flex-col">
             <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{product.name}</h2>
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-2 flex-grow">{product.description}</p>
             <p className="text-gray-500 dark:text-gray-400 text-xs mb-4">Effort Level: {product.effort_level}/10</p>

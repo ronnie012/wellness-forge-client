@@ -18,6 +18,6 @@ A Next.js 15 app with Express.js backend and MongoDB, featuring public landing/p
 - `/products/[id]`: Public product details
 - `/dashboard/add-product`: Protected form to add product (with spinner and toast)
 
-Live Site: 
+Live Site: [WellnessForge](https://wellness-forge-client.vercel.app/)
 
 

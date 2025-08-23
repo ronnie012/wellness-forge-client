@@ -48,7 +48,7 @@ export default function ProductDetails() {
   }
 
   return (
-    <div className="px-8 py-20 max-w-lg mx-auto bg-white dark:bg-gray-800 shadow-md rounded-lg mt-12 mb-12 space-y-4">
+    <div className="p-8 max-w-lg mx-auto bg-white dark:bg-gray-800 shadow-xl dark:shadow-2xl rounded-lg my-8 border border-gray-200 dark:border-gray-700 hover:shadow-2xl dark:hover:shadow-3xl transition-all duration-300 transform hover:scale-105">
       <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{product.name}</h1>
       <p className="text-gray-700 dark:text-gray-300 mb-4">{product.description}</p>
       <div className="grid grid-cols-2 gap-4 mb-4">

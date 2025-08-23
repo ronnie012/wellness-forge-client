@@ -31,7 +31,7 @@ export default function ProductHighlights() {
 
   return (
     <section className="py-16 px-12 min-h-[300px]">
-      <h2 className="text-2xl font-bold text-center text-foreground">Featured Wellness Products</h2>
+      <h2 className="text-3xl font-bold text-center text-foreground">Featured Wellness Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
         {loading ? (
           <div className="col-span-full text-center flex flex-col items-center justify-center h-full">
@@ -43,7 +43,7 @@ export default function ProductHighlights() {
           </div>
         ) : (
           products.map(product => (
-            <Link href={`/products/${product._id}`} key={product._id} className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 block h-full flex flex-col">
+            <Link href={`/products/${product._id}`} key={product._id} className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-2xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl dark:hover:shadow-3xl transition-all duration-300 transform hover:scale-105 block h-full flex flex-col">
               <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{product.name}</h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 flex-grow">{product.description}</p>
               <p className="text-gray-500 dark:text-gray-400 text-xs mb-4">Effort: {product.effort_level}/10 | Impact: {product.impact_score}</p>
