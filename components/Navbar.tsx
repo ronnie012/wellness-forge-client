@@ -13,7 +13,7 @@ export default function Navbar() {
   const { showToast } = useToast(); // Get showToast
 
   return (
-    <nav className="p-4 bg-primary text-primary-foreground grid grid-cols-3 items-center">
+    <nav className="sticky top-0 z-10 py-4 px-12 bg-white/10 dark:bg-gray-800/10 backdrop-blur-md text-gray-900 dark:text-white grid grid-cols-3 items-center border-b border-gray-200 dark:border-gray-700 rounded-bl-lg rounded-br-lg">
       <div className="col-span-1">
         <Link href="/" className="text-lg font-bold">WellnessForge</Link>
       </div>

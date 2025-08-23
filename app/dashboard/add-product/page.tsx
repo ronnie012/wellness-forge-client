@@ -5,6 +5,7 @@ import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useToast } from "@/components/Toast";
+import Spinner from "@/components/Spinner";
 
 
 export default function AddProduct() {
@@ -28,7 +29,12 @@ export default function AddProduct() {
     }
   }, [session, router, showToast]);
 
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading") return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground">
+      <Spinner />
+      <p className="text-2xl mt-4">Loading...</p>
+    </div>
+  );
   if (!session) {
     router.push("/login");
     return null;
@@ -58,22 +64,22 @@ export default function AddProduct() {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Add New Product</h1>
-      <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+    <div className="p-4 bg-background text-foreground">
+      <h1 className="text-3xl font-bold text-center text-foreground py-4">Add New Product</h1>
+      <form onSubmit={handleSubmit} className="mt-4 mb-8 space-y-4 max-w-lg mx-auto border border-gray-200 dark:border-gray-700 rounded-lg p-6">
         <input
           type="text"
           placeholder="Product Name"
           value={formData.name}
           onChange={e => setFormData({ ...formData, name: e.target.value })}
-          className="border p-2 w-full"
+          className="block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-900 dark:text-white"
           required
         />
         <textarea
           placeholder="Product Description"
           value={formData.description}
           onChange={e => setFormData({ ...formData, description: e.target.value })}
-          className="border p-2 w-full"
+          className="block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-900 dark:text-white"
           required
         />
         <input
@@ -83,25 +89,25 @@ export default function AddProduct() {
           placeholder="Effort Level (1-10)"
           value={formData.effort_level}
           onChange={e => setFormData({ ...formData, effort_level: Number(e.target.value) })}
-          className="border p-2 w-full"
+          className="block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-900 dark:text-white"
           required
         />
         <textarea
           placeholder="Steps"
           value={formData.steps}
           onChange={e => setFormData({ ...formData, steps: e.target.value })}
-          className="border p-2 w-full"
+          className="block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-900 dark:text-white"
           required
         />
         <textarea
           placeholder="Benefits"
           value={formData.benefits}
           onChange={e => setFormData({ ...formData, benefits: e.target.value })}
-          className="border p-2 w-full"
+          className="block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-900 dark:text-white"
           required
         />
-        <button type="submit" disabled={loading} className="bg-green-500 text-white px-4 py-2 rounded">
-          {loading ? <span className="animate-spin">⏳</span> : "Add Product"}
+        <button type="submit" disabled={loading} className="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded dark:bg-green-600 dark:hover:bg-green-700 dark:text-white">
+          {loading ? <Spinner /> : "Add Product"}
         </button>
       </form>
     </div>

@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { ToastProvider } from "@/components/Toast";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,21 +20,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
-      <body className={`${inter.className} flex flex-col min-h-screen`}>
+    <html lang="en">
+      <body className={`${inter.className} flex flex-col min-h-screen bg-background text-foreground`}>
         <ToastProvider>
-            <ThemeProvider>
+          <ThemeProvider>
             <AuthProvider>
               <Navbar />
-              <main className="flex-grow min-h-[calc(100vh-theme(spacing.16)-theme(spacing.16))]">
+              <main className="flex-grow">
                 {children}
               </main>
             </AuthProvider>
           </ThemeProvider>
         </ToastProvider>
+        <Footer />
       </body>
     </html>
   );
 }
-
-
